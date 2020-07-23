@@ -19,9 +19,9 @@ images_all=[]
 labels_all=[]
 
 #Read one npy file
-images_one = np.load('D:/user/Desktop/Hand/train/one_images.npy')
+images_one = np.load('E:/user/Desktop/Hand/train/Handone_images.npy')
 images_all = images_one
-labels_one = np.load('D:/user/Desktop/Hand/train/one_labels_hot.npy')
+labels_one = np.load('E:/user/Desktop/Hand/train/Handone_labels_hot.npy')
 labels_all = labels_one
 # print(images_all[2].shape)
 # gray= cv2.cvtColor(images_all[2], cv2.COLOR_BGR2GRAY)
@@ -30,43 +30,42 @@ labels_all = labels_one
 
 #Read two npy file
 #axis 0 - row
-images_two = np.load('D:/user/Desktop/Hand/train/two_images.npy')
+images_two = np.load('E:/user/Desktop/Hand/train/Handtwo_images.npy')
 images_all = np.append(images_all, images_two, axis=0)
-labels_two = np.load('D:/user/Desktop/Hand/train/two_labels_hot.npy')
+labels_two = np.load('E:/user/Desktop/Hand/train/Handtwo_labels_hot.npy')
 labels_all = np.append(labels_all, labels_two, axis=0)
 
 #Read three npy file
-images_three=np.load('D:/user/Desktop/Hand/train/three_images.npy')
-images_all=np.append(images_all, images_three, axis=0)
-labels_three=np.load('D:/user/Desktop/Hand/train/three_labels_hot.npy')
-labels_all=np.append(labels_all, labels_three, axis=0)
+images_three = np.load('E:/user/Desktop/Hand/train/Handthree_images.npy')
+images_all = np.append(images_all, images_three, axis=0)
+labels_three = np.load('E:/user/Desktop/Hand/train/Handthree_labels_hot.npy')
+labels_all = np.append(labels_all, labels_three, axis=0)
 
 #Read four npy file
-images_four=np.load('D:/user/Desktop/Hand/train/four_images.npy')
-images_all=np.append(images_all, images_four, axis=0)
-labels_four=np.load('D:/user/Desktop/Hand/train/four_labels_hot.npy')
-labels_all=np.append(labels_all, labels_four, axis=0)
+images_four = np.load('E:/user/Desktop/Hand/train/Handfour_images.npy')
+images_all = np.append(images_all, images_four, axis=0)
+labels_four = np.load('E:/user/Desktop/Hand/train/Handfour_labels_hot.npy')
+labels_all = np.append(labels_all, labels_four, axis=0)
 
 #Read five npy file
-images_five=np.load('D:/user/Desktop/Hand/train/five_images.npy')
+images_five = np.load('E:/user/Desktop/Hand/train/Handfive_images.npy')
 # print(images_all.shape)
-images_all=np.append(images_all, images_five, axis=0)
+images_all = np.append(images_all, images_five, axis=0)
 # print(images_five.shape)
-labels_five=np.load('D:/user/Desktop/Hand/train/five_labels_hot.npy')
+labels_five = np.load('E:/user/Desktop/Hand/train/Handfive_labels_hot.npy')
 # print(labels_five)
 # #[5 5 5 ... 5 5 5]
-labels_all=np.append(labels_all, labels_five, axis=0)
+labels_all = np.append(labels_all, labels_five, axis=0)
 # print(labels_all.shape)
 #[1 1 1 ... 5 5 5]
 
-#new added
-#print("images_all.shape before reshape")
-#print(images_all.shape) -> (18000, 50, 50)
+# new added
+# print("images_all.shape before reshape")
+# print(images_all.shape) -> (18000, 50, 50)
 # Expend dimension for 1 channel image
 images_all = images_all.reshape(-1,50,50,1)
 # print("After / 255")
 # print(images_all)
-
 
 images_all = images_all / 255
 # print("Before / 255")
@@ -121,8 +120,8 @@ def baseline_model():
     model.add(Flatten())
     model.add(Dense(128, activation='relu', name='final_output_1'))
     model.add(Dropout(0.5))
-    model.add(Dense(128, activation='relu', name='final_output_2'))
-    model.add(Dropout(0.5))
+    # model.add(Dense(128, activation='relu', name='final_output_2'))
+    # model.add(Dropout(0.5))
     model.add(Dense(6, activation='sigmoid', name='class_output'))
     optimizer = RMSprop(lr=1e-4)
     objective = 'categorical_crossentropy'
@@ -143,8 +142,7 @@ labels_all = labels_all[Index]
 
 
 # model.fit(images_all, labels_all, batch_size=64, epochs=10, shuffle= True)
-model.fit(images_all, labels_all, batch_size=64, epochs=10, validation_split=0.2)
-
+model.fit(images_all, labels_all, batch_size=64, epochs=10, validation_split=0.3)
 
 
 # Save the model
