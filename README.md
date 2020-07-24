@@ -1,6 +1,7 @@
 # Hand_gesture_recognizer
-This is the college graduation monograph.  
+## This is my college graduation monograph.  
 
+more infor: https://hackmd.io/@ZhangQiongyun/B1LiAemdU 
 
 * 圖片生成: captureHand.py -> 自行拍照(resize、二值化圖像)
 
