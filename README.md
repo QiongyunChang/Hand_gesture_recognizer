@@ -1,5 +1,5 @@
 # Hand_gesture_recognizer
-## This is my college graduation monograph.  
+This is my college graduation monograph.
 
 more infor: https://hackmd.io/@ZhangQiongyun/B1LiAemdU 
 
@@ -17,10 +17,10 @@ more infor: https://hackmd.io/@ZhangQiongyun/B1LiAemdU
 * 與網站結合: web_flask.py、index.html、main.css
 
 
-# Recognition
+## Recognition
 ![image](https://github.com/Todoorno/Hand_gesture_recognizer/blob/master/tempsnip.png)
 
-# Outcome 
+## Outcome 
 ![image](https://github.com/Todoorno/Hand_gesture_recognizer/blob/master/outcome.png)
 
 
