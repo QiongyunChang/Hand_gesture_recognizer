@@ -16,7 +16,9 @@ import cv2
 import time
 bg = None
 global loaded_model
+# 初始化couter數字12345被辨識到的次數
 counter = [0,0,0,0,0]
+# 總共辨識的次數
 sumofcount = 0
 ignore = 0
 
@@ -148,7 +150,11 @@ if __name__ == "__main__":
 
             # segment the hand region
             hand = segment(gray)
-
+            # 如果偵測不到手,結束程式
+            if num_frames > 200 and hand is None:
+                time.sleep(5)
+                print("No Hand")
+                break
             # check whether hand region is segmented
             if hand is not None:
                 # time.sleep(2)
@@ -167,27 +173,26 @@ if __name__ == "__main__":
                 cv2.imshow("Thesholded", thresholded)
                 cv2.moveWindow("Thesholded", 770, 100)
                 # print(fingers)
-                #Sum
+                # Sum
                 sumofcount = 0
                 for j in range(5):
                     sumofcount = sumofcount + counter[j]
-                # 忽略前10次的辨識結果
-                if sumofcount == 10 and ignore == 0 :
+                # 忽略前15次的辨識結果
+                if sumofcount == 15 and ignore == 0:
                     # print("Now")
-                    counter = [0,0,0,0,0]
-                    ignore = ignore + 1
+                    counter = [0, 0, 0, 0, 0] #初始化list, 忽略前15次的辨識結果
+                    ignore = ignore + 1 #防錯
                     # print(ignore,counter)
-                # 從第11次的開始進行正式辨識
-                for i in [0,1,2,3,4]:
-                    # if fingers == i + 1 and sum(count) < 20:
+                # 從第16次的開始進行正式辨識
+                for i in [0, 1, 2, 3, 4]:
                     if fingers == i + 1:
-                        counter[i] = counter[i] +1
+                        counter[i] = counter[i] + 1
                 if sumofcount == 40:
-                    Max = np.argmax(counter) + 1
-                    # print(counter) 總數為20
+                    Max = np.argmax(counter) + 1 # 找最多被辨識出來的位置
+                    print(counter) # 總數為20
                     # 最後結果為最多被辨識出的值
                     print(Max)
-                    # cv2.putText(圖像, 文字, 位置, 字體, 字體大小, 顏色, 文字粗細 )
+                    # 顯示在螢幕畫面上 {cv2.putText(圖像, 文字, 位置, 字體, 字體大小, 顏色, 文字粗細 )}
                     cv2.putText(clone, str(Max), (200, 45), cv2.FONT_HERSHEY_DUPLEX, 1, (255, 0, 255), 2)
                     time.sleep(2)
                 elif sumofcount > 40:
@@ -200,7 +205,7 @@ if __name__ == "__main__":
         # increment the number of frames
         num_frames += 1
 
-        # display the frame with segmented hand
+        # display the frame with segmented hand  & 調整視窗大小
         cv2.imshow("Video Feed", clone)
         cv2.moveWindow("Video Feed", 170, 100)
 
