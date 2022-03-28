@@ -17,8 +17,6 @@ more infor: https://hackmd.io/@ZhangQiongyun/B1LiAemdU
 * 與網站結合: web_flask.py、index.html、main.css
 
 
-## Recognition
-![image](https://github.com/Todoorno/Hand_gesture_recognizer/blob/master/tempsnip.png)
 
 ## Outcome 
 ![image](https://github.com/Todoorno/Hand_gesture_recognizer/blob/master/outcome.png)
